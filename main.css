@@ -1,0 +1,714 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+  /* =================
+        Colors
+=================== */
+  --scissors-gradient-from: hsl(39, 89%, 49%);
+  --scissors-gradient-to: hsl(40, 84%, 53%);
+  --scissors-shadow: hsl(40, 81%, 37%);
+  --paper-gradient-from: hsl(230, 89%, 62%);
+  --paper-gradient-to: hsl(230, 89%, 65%);
+  --paper-shadow: hsl(230, 55%, 42%);
+  --rock-gradient-from: hsl(349, 71%, 52%);
+  --rock-gradient-to: hsl(349, 70%, 56%);
+  --rock-shadow: hsl(349, 68%, 34%);
+  --lizard-gradient-from: hsl(261, 73%, 60%);
+  --lizard-gradient-to: hsl(261, 72%, 63%);
+  --lizard-shadow: hsl(261, 54%, 39%);
+  --cyan-from: hsl(189, 59%, 53%);
+  --cyan-to: hsl(189, 58%, 57%);
+  --cyan-shadow: hsl(189, 54%, 28%);
+  --dark-text: hsl(229, 25%, 31%);
+  --score-text: hsl(229, 64%, 46%);
+  --header-outline: hsl(217, 16%, 45%);
+  --inset-shadow: hsl(217, 21%, 83%);
+  --radial-gradient-from: hsl(214, 47%, 23%);
+  --radial-gradient-to: hsl(237, 49%, 15%);
+
+  /* =================
+       Font
+=================== */
+  --ff-primary: 'Barlow Semi Condensed', sans-serif;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fs-xs: 0.875rem;
+  --fs-s: 1rem;
+  --fs-m: 2rem;
+  --fs-xl: 2.5rem;
+  --fs-xxl: 3rem;
+
+  /* =================
+    Border radius
+=================== */
+  --border-radius: 10px;
+}
+
+/* ==================
+    General style
+====================*/
+body {
+  font-family: var(--ff-primary);
+  text-transform: uppercase;
+  color: #fff;
+  background: radial-gradient(
+    var(--radial-gradient-from),
+    var(--radial-gradient-to)
+  );
+}
+.sr-only {
+  position: absolute;
+  left: -1000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.flex-flow {
+  display: flex;
+  align-items: center;
+}
+
+/*==================
+     Main content
+ ================== */
+.wrapper {
+  width: 90%;
+  height: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+  padding-block: 1rem;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/*==================
+        Header
+ ================== */
+
+.header {
+  outline: 2px solid var(--header-outline);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+}
+.header-img {
+  width: 30%;
+  max-width: 200px;
+}
+.header-score {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  color: var(--score-text);
+  width: 80px;
+  height: 80px;
+  padding: 1rem;
+  justify-content: center;
+  flex-direction: column;
+}
+.header-score > * {
+  flex: 1;
+}
+.header-score span {
+  font-size: var(--fs-m);
+  font-weight: var(--fw-bold);
+  color: var(--dark-text);
+}
+
+/*==================
+    Game container
+ ================== */
+
+.game-container,
+.img-wrapper,
+.advanced {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-inline: auto;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  height: 70%;
+}
+
+.img-wrapper::after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 80%;
+  height: 80%;
+  background: url(images/bg-triangle.svg) no-repeat center center/contain;
+  z-index: -1;
+}
+
+/*====================
+ Setting the img items
+ ===================== */
+
+.game-item {
+  padding: 1rem;
+  height: 130px;
+  width: 130px;
+  border-radius: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game-item img {
+  background-color: #fff;
+  border-radius: 100vh;
+  padding: 1.5rem;
+  aspect-ratio: 1/1;
+  box-shadow: 0 5px 0 0 var(--inset-shadow) inset;
+}
+[data-id='paper'] {
+  background: linear-gradient(
+    var(--paper-gradient-from),
+    var(--paper-gradient-to)
+  );
+  box-shadow: 0 5px 0 0 var(--paper-shadow);
+}
+
+[data-id='scissors'] {
+  background: linear-gradient(
+    var(--scissors-gradient-from),
+    var(--scissors-gradient-to)
+  );
+  box-shadow: 0 5px 0 0 var(--scissors-shadow);
+}
+
+[data-id='rock'] {
+  background: linear-gradient(
+    var(--rock-gradient-from),
+    var(--rock-gradient-to)
+  );
+  box-shadow: 0 5px 0 0 var(--rock-shadow);
+}
+[data-id='lizard'] {
+  background: linear-gradient(
+    var(--lizard-gradient-from),
+    var(--lizard-gradient-to)
+  );
+  box-shadow: 0 5px 0 0 var(--lizard-shadow);
+}
+[data-id='spock'] {
+  background: linear-gradient(var(--cyan-from), var(--cyan-to));
+  box-shadow: 0 5px 0 0 var(--cyan-shadow);
+}
+
+/*====================
+ Setting the rule btn
+ ===================== */
+.btn {
+  width: fit-content;
+  padding: 0.5rem 2rem;
+  text-transform: uppercase;
+  border: 1px solid var(--header-outline);
+  background-color: transparent;
+  color: #fff;
+  border-radius: var(--border-radius);
+  align-self: center;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+.btn:hover {
+  background-color: var(--lizard-gradient-from);
+}
+
+/*====================
+        Rule modal
+ ===================== */
+.modal {
+  position: absolute;
+  backdrop-filter: blur(5px);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-content: center;
+}
+
+.modal-container {
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+  height: 100vh;
+  padding: 4rem;
+}
+h2 {
+  color: var(--dark-text);
+  font-size: var(--fs-xl);
+}
+img {
+  cursor: pointer;
+}
+
+@media (min-width: 600px) {
+}
+
+/*====================
+       Result
+ ===================== */
+.result {
+  width: 100%;
+  height: 80%;
+  padding-block: 2rem;
+
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3rem;
+  transition: all 3s ease-in-out;
+}
+.choose {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.visible {
+  visibility: hidden;
+  position: relative;
+}
+.visible::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #192845;
+  visibility: visible;
+  border-radius: 100vh;
+}
+
+.active-choose .img-wrapper:after {
+  background: none;
+}
+.display-result {
+  width: 80%;
+  margin-inline: auto;
+  text-align: center;
+}
+.display-result p {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+}
+.result-btn {
+  margin-top: 1rem;
+  text-transform: uppercase;
+  padding: 0.5rem 3rem;
+  border-radius: var(--border-radius);
+  border: none;
+  letter-spacing: 2px;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+}
+.result-btn:hover {
+  background-color: var(--lizard-gradient-from);
+  color: #fff;
+}
+.winner {
+  position: relative;
+}
+.winner::before {
+  content: '';
+  position: absolute;
+  background: radial-gradient(
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.08) 41%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.05) 56%,
+    rgba(255, 255, 255, 0.02) 55%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  width: 200%;
+  height: 200%;
+  border-radius: 100vh;
+  z-index: -1;
+}
+
+@media (min-width: 600px) {
+  .wrapper {
+    gap: 4rem;
+    max-width: 1200px;
+  }
+  .game-container,
+  .img-wrapper,
+  .advanced {
+    max-width: 750px;
+    gap: 4rem;
+    height: 100%;
+  }
+  .game-item {
+    height: 230px;
+    width: 230px;
+  }
+  .game-item img {
+    padding: 4rem;
+  }
+  .img-wrapper::after {
+    width: 60%;
+    height: 60%;
+  }
+  .btn {
+    align-self: flex-end;
+    position: relative;
+  }
+  .modal-container {
+    height: 80vh;
+  }
+
+  .active-choose {
+    max-width: 1000px;
+  }
+
+  .active-choose .game-item img {
+    padding: 4rem;
+  }
+
+  .result {
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    width: 1000px;
+    height: max-content;
+  }
+  .player_choice {
+    order: 1;
+  }
+
+  .display-result {
+    order: 2;
+  }
+  .house_choice {
+    order: 3;
+  }
+  .display-result {
+    width: 100%;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .result p {
+    order: 1;
+    font-size: var(--fs-m);
+  }
+  .display-result p {
+    font-size: var(--fs-xxl);
+  }
+  .result .game-item {
+    order: 2;
+    height: 250px;
+    width: 250px;
+  }
+  .winner::before {
+    width: 300%;
+    height: 300%;
+  }
+}
+
+/*==================== 
+    Start modal
+===================== */
+
+.choose-game-modal {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-content: center;
+  gap: 4rem;
+  background: radial-gradient(
+    var(--radial-gradient-from),
+    var(--radial-gradient-to)
+  );
+}
+.choose-game-modal p {
+  text-align: center;
+  font-size: var(--fs-xl);
+  padding-inline: 2rem;
+  transition: all 0.5s ease-in-out;
+  animation: moveInLeft 2s ease-in-out;
+}
+.choose-game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.choose-btn {
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--header-outline);
+  padding: 0.5rem 1rem;
+  margin-inline: 1.5rem;
+  gap: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  position: relative;
+}
+
+.choose-btn:hover {
+  transform: scale(1.1);
+  border: 1px solid var(--lizard-gradient-from);
+}
+
+@media (min-width: 800px) {
+  .choose-game-container {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+.advanced {
+  width: 400px;
+  height: 361px;
+}
+
+.advanced .game-item {
+  position: absolute;
+}
+.advanced .scissors {
+  top: 30px;
+}
+.advanced .paper {
+  top: 110px;
+  right: 20px;
+}
+.advanced .rock {
+  top: 230px;
+  right: 60px;
+}
+.advanced .lizard {
+  top: 230px;
+  left: 60px;
+}
+
+.advanced .spock {
+  top: 110px;
+  left: 20px;
+}
+.advanced:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 60%;
+  height: 60%;
+  left: 50%;
+  transform: translate(-50%);
+  background: url(images/bg-pentagon.svg) no-repeat center center/contain;
+  z-index: -1;
+}
+.advanced .game-item {
+  width: 100px;
+  height: 100px;
+}
+.advanced .game-item img {
+  padding: 1.3rem;
+}
+@media (min-width: 800px) {
+  .advanced {
+    width: 700px;
+    height: 452px;
+  }
+  .advanced:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 80%;
+    height: 80%;
+    left: 50%;
+    transform: translate(-50%);
+    background: url(images/bg-pentagon.svg) no-repeat center center/contain;
+    z-index: -1;
+  }
+  .advanced .game-item {
+    width: 160px;
+    height: 160px;
+  }
+  .advanced .game-item img {
+    padding: 2.4rem;
+  }
+  .advanced .scissors {
+    top: -30px;
+  }
+  .advanced .paper {
+    top: 100px;
+    right: 80px;
+  }
+  .advanced .rock {
+    top: 330px;
+    right: 160px;
+  }
+  .advanced .lizard {
+    top: 330px;
+    left: 160px;
+  }
+
+  .advanced .spock {
+    top: 100px;
+    left: 80px;
+  }
+}
+.choose-btn {
+  position: relative;
+}
+
+/*==================== 
+        Animation
+===================== */
+
+.choose-btn {
+  transition: all 300ms ease-in-out;
+  animation: moveInBottom 2s ease-in-out;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+.choose-game-modal p {
+  transition: all 0.5s ease-in-out;
+  animation: moveInLeft 2s ease-in-out;
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.choose-btn:hover {
+  transform: translateY(-5px) scale(1.1);
+  border: 1px solid var(--lizard-gradient-from);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+/* .game-item {
+  animation: popUp 1s ease-in-out;
+} */
+.game-item:hover {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+.result .game-item {
+  animation: popUp 0.5s ease-in-out;
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+.display-result {
+  animation: fadeOut 1.5s ease-in-out;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+/*==================== 
+    js classes 
+===================== */
+.hidden {
+  display: none;
+}

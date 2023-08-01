@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrapper flex-flow">
+      <h1 class="sr-only">Frontend Mentor | Rock, Paper, Scissors</h1>
+      <header class="header flex-flow">
+        <div class="header-img">
+          <img
+            src="images/logo.svg"
+            alt="Rock, paper, scissors"
+            class="img-logo"
+          />
+        </div>
+        <div class="header-score flex-flow">
+          <p>score</p>
+          <span class="score">12</span>
+        </div>
+      </header>
+      <div class="game-container flex-flow">
+        <div class="img-wrapper flex-flow"></div>
+        <div class="result flex-flow hidden">
+          <div class="player_choice choose"></div>
+          <div class="house_choice choose"></div>
+          <div class="display-result hidden">
+            <p class="message"></p>
+            <button class="result-btn">play again</button>
+          </div>
+        </div>
+      </div>
+      <button class="btn">rules</button>
+      <div class="modal hidden">
+        <div class="modal-container flex-flow">
+          <h2>rules</h2>
+          <img
+            src="images/image-rules.svg"
+            alt="image of rules"
+            class="rules"
+          />
+          <img
+            src="images/icon-close.svg"
+            alt="close modal"
+            class="close-modal"
+          />
+        </div>
+      </div>
+      <div class="choose-game-modal">
+        <p>choose the game you want to play</p>
+        <div class="choose-game-container flex-flow">
+          <button class="choose-btn flex-flow simple-game">
+            <img src="images/icon-rock.svg" alt="rock, paper, scissors" />
+            <img src="images/icon-paper.svg" alt="rock, paper, scissors" />
+            <img src="images/icon-scissors.svg" alt="rock, paper, scissors" />
+          </button>
+          <button class="choose-btn flex-flow advanced-game">
+            <img
+              src="images/icon-rock.svg"
+              alt="rock, paper, scissors, lizard, spock"
+            />
+            <img
+              src="images/icon-paper.svg"
+              alt="rock, paper, scissors, lizard, spock"
+            />
+            <img
+              src="images/icon-scissors.svg"
+              alt="rock, paper, scissors, lizard, spock"
+            />
+            <img
+              src="images/icon-lizard.svg"
+              alt="rock, paper, scissors, lizard, spock"
+            />
+            <img
+              src="images/icon-spock.svg"
+              alt="rock, paper, scissors, lizard, spock"
+            />
+          </button>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by
+        <a href="https://github.com/myselfabhi">Abhinav Verma</a>.
+      </div>
+    </footer>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
